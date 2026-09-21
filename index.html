@@ -46,11 +46,19 @@
       <div class="trailer-bg-glow"></div>
       <div class="trailer-kicker">TRAILER</div>
       <div class="trailer-video-frame">
-          <iframe
-              src="https://drive.google.com/file/d/1dd098To1mpbHrRj_rM0I-lbbRk-PHo8b/preview"
-              allow="autoplay; fullscreen"
-              allowfullscreen>
-          </iframe>
+          <video
+              id="trailerVideo"
+              controls
+              muted
+              playsinline
+              preload="metadata"
+          >
+              <source
+                  src="https://github.com/Juancamilo3821/subterraCypher/releases/download/trailer-v1/Trailer-Subterra.mov"
+                  type="video/quicktime"
+              >
+              Tu navegador no soporta video HTML5.
+          </video>
       </div>
       <h2>SUBTERRA CYPHER.</h2>
       <div class="event-date" id="eventDate">25 / 09 / 2026</div>
