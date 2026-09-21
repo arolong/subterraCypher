@@ -63,7 +63,7 @@
   .nav-brand img{ width:26px; height:26px; object-fit:contain; }
   .nav-mark{ font-family:var(--display); font-weight:700; font-size:13.5px; letter-spacing:0.06em; color:var(--metal); }
 
-    .stage-wrap{ position:relative; height:340vh; }
+    .stage-wrap{ position:relative; height:195vh; }
   .stage{
     position:sticky; top:0; height:100svh; overflow:hidden;
     display:flex; align-items:center; justify-content:center;
