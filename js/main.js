@@ -80,7 +80,6 @@
     const muteBtn = document.getElementById('tcMute');
     const muteWave2 = document.getElementById('tcMuteWave2');
     const muteX = document.getElementById('tcMuteX');
-    const fullscreenBtn = document.getElementById('tcFullscreen');
 
     function formatTime(sec) {
       if (!isFinite(sec)) return '0:00';
@@ -137,10 +136,4 @@
       setMuteIcon(trailerVideo.muted);
     });
     setMuteIcon(trailerVideo.muted);
-
-    fullscreenBtn.addEventListener('click', () => {
-      const target = trailerVideo || trailerFrame;
-      if (target.requestFullscreen) target.requestFullscreen();
-      else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-    });
   }
