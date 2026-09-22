@@ -506,35 +506,75 @@ nav.visible {
   pointer-events: none;
   transition: transform .3s ease, background .3s ease, opacity .25s ease;
 }
-.trailer-video-frame:hover .trailer-play,
-.trailer-video-frame:hover .trailer-fullscreen {
+.trailer-video-frame.is-paused .trailer-play {
   opacity: 1;
   pointer-events: auto;
 }
 .trailer-play:hover { transform: scale(1.08); background: rgba(138,22,32,0.5); }
 .trailer-play svg { width: 20px; height: 20px; margin-left: 3px; }
 
-.trailer-fullscreen {
+.trailer-controls {
   position: absolute;
-  z-index: 2;
-  right: 18px;
-  bottom: 18px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+.trailer-video-frame:hover .trailer-controls,
+.trailer-video-frame.is-paused .trailer-controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tc-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  flex: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: transform .3s ease, background .3s ease, opacity .25s ease;
+  opacity: 0.9;
+  transition: opacity .2s ease;
 }
-.trailer-fullscreen:hover { transform: scale(1.08); background: rgba(138,22,32,0.5); }
-.trailer-fullscreen svg { width: 16px; height: 16px; }
+.tc-btn:hover { opacity: 1; }
+.tc-btn svg { width: 18px; height: 18px; }
+
+.tc-time {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #ffffff;
+  white-space: nowrap;
+  flex: none;
+}
+
+.tc-progress {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+}
+.tc-progress-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0%;
+  background: var(--blood);
+  border-radius: 2px;
+  pointer-events: none;
+}
 
 
 /* =========================

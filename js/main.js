@@ -63,36 +63,83 @@
   window.addEventListener('resize', onScroll);
   onScroll();
 
-  const trailerPlayBtn = document.getElementById('trailerPlay');
-  const trailerPlayIcon = document.getElementById('trailerPlayIcon');
-  const ICON_PLAY = 'M6 4L20 12L6 20V4Z';
-  const ICON_PAUSE = 'M6 4H10V20H6V4ZM14 4H18V20H14V4Z';
+  const trailerFrame = document.getElementById('trailerFrame');
+  const trailerVideo = document.getElementById('trailerVideo');
 
-  function toggleTrailer() {
-    const video = document.querySelector('.trailer-video-frame video');
-    if (!video) return;
-    if (video.paused) {
-      video.play();
-      trailerPlayIcon.setAttribute('d', ICON_PAUSE);
-    } else {
-      video.pause();
-      trailerPlayIcon.setAttribute('d', ICON_PLAY);
+  if (trailerFrame && trailerVideo) {
+    const ICON_PLAY = 'M6 4L20 12L6 20V4Z';
+    const ICON_PAUSE = 'M6 4H10V20H6V4ZM14 4H18V20H14V4Z';
+
+    const centerPlayIcon = document.getElementById('trailerPlayIcon');
+    const barPlayIcon = document.getElementById('tcPlayIcon');
+    const centerPlayBtn = document.getElementById('trailerPlay');
+    const barPlayBtn = document.getElementById('tcPlay');
+    const timeLabel = document.getElementById('tcTime');
+    const progressBar = document.getElementById('tcProgress');
+    const progressFill = document.getElementById('tcProgressFill');
+    const muteBtn = document.getElementById('tcMute');
+    const muteWave2 = document.getElementById('tcMuteWave2');
+    const muteX = document.getElementById('tcMuteX');
+    const fullscreenBtn = document.getElementById('tcFullscreen');
+
+    function formatTime(sec) {
+      if (!isFinite(sec)) return '0:00';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
     }
-  }
 
-  if (trailerPlayBtn) {
-    trailerPlayBtn.addEventListener('click', toggleTrailer);
-    document.addEventListener('click', (e) => {
-      if (e.target.closest('.trailer-video-frame video')) toggleTrailer();
+    function setPlayIcons(isPlaying) {
+      const d = isPlaying ? ICON_PAUSE : ICON_PLAY;
+      if (centerPlayIcon) centerPlayIcon.setAttribute('d', d);
+      if (barPlayIcon) barPlayIcon.setAttribute('d', d);
+      trailerFrame.classList.toggle('is-paused', !isPlaying);
+    }
+
+    function toggleTrailer() {
+      if (trailerVideo.paused) trailerVideo.play();
+      else trailerVideo.pause();
+    }
+
+    trailerVideo.addEventListener('play', () => setPlayIcons(true));
+    trailerVideo.addEventListener('pause', () => setPlayIcons(false));
+    setPlayIcons(false);
+
+    if (centerPlayBtn) centerPlayBtn.addEventListener('click', toggleTrailer);
+    if (barPlayBtn) barPlayBtn.addEventListener('click', toggleTrailer);
+    trailerVideo.addEventListener('click', toggleTrailer);
+
+    trailerVideo.addEventListener('loadedmetadata', () => {
+      timeLabel.textContent = `${formatTime(0)} / ${formatTime(trailerVideo.duration)}`;
     });
-  }
 
-  const trailerFullscreenBtn = document.getElementById('trailerFullscreen');
-  if (trailerFullscreenBtn) {
-    trailerFullscreenBtn.addEventListener('click', () => {
-      const frame = document.querySelector('.trailer-video-frame');
-      const video = frame.querySelector('video');
-      const target = video || frame;
+    trailerVideo.addEventListener('timeupdate', () => {
+      if (!trailerVideo.duration) return;
+      const pct = (trailerVideo.currentTime / trailerVideo.duration) * 100;
+      progressFill.style.width = `${pct}%`;
+      timeLabel.textContent = `${formatTime(trailerVideo.currentTime)} / ${formatTime(trailerVideo.duration)}`;
+    });
+
+    function seekFromEvent(e) {
+      const rect = progressBar.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const pct = Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1);
+      if (trailerVideo.duration) trailerVideo.currentTime = pct * trailerVideo.duration;
+    }
+    progressBar.addEventListener('click', seekFromEvent);
+
+    function setMuteIcon(isMuted) {
+      muteWave2.style.display = isMuted ? 'none' : 'block';
+      muteX.style.display = isMuted ? 'block' : 'none';
+    }
+    muteBtn.addEventListener('click', () => {
+      trailerVideo.muted = !trailerVideo.muted;
+      setMuteIcon(trailerVideo.muted);
+    });
+    setMuteIcon(trailerVideo.muted);
+
+    fullscreenBtn.addEventListener('click', () => {
+      const target = trailerVideo || trailerFrame;
       if (target.requestFullscreen) target.requestFullscreen();
       else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
     });
