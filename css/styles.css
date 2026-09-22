@@ -616,6 +616,218 @@ nav.visible {
 
 
 /* =========================
+   BTS
+========================= */
+
+.bts-section {
+  position: relative;
+  z-index: 1;
+  padding: 14vh 6vw 16vh;
+  border-top: 1px solid var(--hair);
+}
+
+.bts-heading {
+  max-width: 620px;
+  margin: 0 auto 7vh;
+  text-align: center;
+}
+
+.bts-kicker {
+  margin-bottom: 12px;
+  color: var(--blood);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.bts-heading h2 {
+  color: var(--metal);
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
+  letter-spacing: 0.02em;
+}
+
+.bts-heading p {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.bts-mosaic {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  gap: 12px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.bts-video-tile,
+.bts-photo {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--metal);
+}
+
+.bts-video-tile {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.bts-video-poster,
+.bts-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: var(--bg);
+}
+
+.bts-video-poster {
+  position: absolute;
+  inset: 0;
+}
+
+.bts-video-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bts-photo {
+  aspect-ratio: 16 / 9;
+}
+
+.bts-photo:last-child {
+  background: transparent;
+}
+
+.bts-photo:last-child img {
+  mix-blend-mode: normal;
+}
+
+.bts-tile-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.72));
+  transition: background 0.3s ease;
+}
+
+.bts-video-tile:hover .bts-tile-shade {
+  background: linear-gradient(180deg, rgba(138, 22, 32, 0.12), rgba(0, 0, 0, 0.78));
+}
+
+.bts-tile-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.28);
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.bts-video-tile:hover .bts-tile-play {
+  background: rgba(138, 22, 32, 0.72);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.bts-tile-play svg {
+  width: 22px;
+  margin-left: 3px;
+}
+
+.bts-tile-label {
+  position: absolute;
+  bottom: 20px;
+  left: 22px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.bts-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: 5vw;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.bts-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.bts-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.82);
+}
+
+.bts-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1060px);
+  background: var(--metal);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+.bts-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  color: #ffffff;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.bts-modal-close {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.bts-modal-close:hover {
+  border-color: var(--blood);
+  background: var(--blood);
+}
+
+.bts-modal-frame {
+  width: 100%;
+  height: min(68vh, 640px);
+  margin: 0;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+
+/* =========================
    FOOTER
 ========================= */
 
@@ -713,6 +925,34 @@ footer {
   .trailer-stage h2 {
     font-size:
       clamp(1rem, 2vw, 1.3rem);
+  }
+
+  .bts-modal-frame {
+    height: 68vh;
+  }
+}
+
+@media (max-width: 700px) {
+  .bts-section {
+    padding: 12vh 5vw;
+  }
+
+  .bts-mosaic {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .bts-video-tile {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+
+  .bts-modal {
+    padding: 5vw;
+  }
+
+  .bts-modal-frame {
+    height: 56vw;
   }
 }
 

@@ -90,6 +90,64 @@
   </div>
 </section>
 
+<section class="bts-section" id="btsSection">
+  <div class="bts-heading">
+    <div class="bts-kicker">DETRAS DE SUBTERRA</div>
+    <h2>BEHIND THE SUBTERRA CYPHER.</h2>
+    <p>Un vistazo al proceso, la energía y las personas detrás del proyecto.</p>
+  </div>
+
+  <div class="bts-mosaic">
+    <button class="bts-video-tile" id="btsVideoOpen" type="button" aria-label="Abrir video del detrás de cámaras">
+      <span class="bts-video-poster" aria-hidden="true">
+        <img src="assets/bts/BANNER SUBTERRA WHITE.png" alt="">
+      </span>
+      <span class="bts-tile-shade"></span>
+      <span class="bts-tile-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M8 5L19 12L8 19V5Z" fill="currentColor"/></svg>
+      </span>
+      <span class="bts-tile-label">VER BTS</span>
+    </button>
+
+    <figure class="bts-photo">
+      <img src="assets/logo-mark.png" alt="Logo símbolo de Subterra">
+    </figure>
+    <figure class="bts-photo">
+      <img src="assets/bts/creditos new black V1.png" alt="Créditos de Subterra">
+    </figure>
+  </div>
+</section>
+
+<div class="bts-modal" id="btsModal" aria-hidden="true">
+  <div class="bts-modal-backdrop" data-bts-close></div>
+  <div class="bts-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="btsModalTitle">
+    <div class="bts-modal-header">
+      <span id="btsModalTitle">BEHIND THE CYPHER.</span>
+      <button class="bts-modal-close" type="button" data-bts-close aria-label="Cerrar video">&times;</button>
+    </div>
+    <div class="trailer-video-frame bts-modal-frame" id="btsFrame">
+      <video id="btsVideo" src="assets/bts/Shayfersaurio BTS.mp4" data-src="assets/bts/Shayfersaurio BTS.mp4" poster="assets/bts/BANNER SUBTERRA WHITE.png" playsinline preload="none">
+        Tu navegador no soporta video HTML5.
+      </video>
+      <button class="trailer-play" id="btsPlay" type="button" aria-label="Reproducir o pausar el BTS">
+        <svg viewBox="0 0 24 24" fill="none"><path id="btsPlayIcon" d="M6 4L20 12L6 20V4Z" fill="#ffffff"/></svg>
+      </button>
+      <div class="trailer-controls" id="btsControls">
+        <button class="tc-btn" id="btsTcPlay" type="button" aria-label="Reproducir o pausar">
+          <svg viewBox="0 0 24 24"><path id="btsTcPlayIcon" d="M6 4L20 12L6 20V4Z" fill="#ffffff"/></svg>
+        </button>
+        <span class="tc-time" id="btsTcTime">0:00 / 0:00</span>
+        <div class="tc-progress" id="btsTcProgress" role="slider" aria-label="Progreso del video">
+          <div class="tc-progress-fill" id="btsTcProgressFill"></div>
+        </div>
+        <button class="tc-btn" id="btsTcMute" type="button" aria-label="Silenciar o activar sonido">
+          <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path id="btsTcMuteWave" d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path id="btsTcMuteX" d="M19.5 12l2.5-2.5-1.5-1.5-2.5 2.5-2.5-2.5-1.5 1.5 2.5 2.5 2.5 2.5 1.5-1.5z" style="display:none"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer id="footer">
   <div class="footer-mark">SUBTERRA</div>
   <div class="footer-ig-grid">
